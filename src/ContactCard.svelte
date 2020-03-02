@@ -1,6 +1,8 @@
 <script>
     export let userName = 'User Name';
-    export let profileImageUrl = '';
+    export let profileImageUrl = 'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60';
+    export let jobTitle = 'Job Title';
+    export let description = 'A short description';
 </script>
 
 <div class="contact-card">
@@ -10,11 +12,11 @@
     </div>
     <div class="user-data">
       <h1>{userName}</h1>
-      <h2>Job Title</h2>
+      <h2>{jobTitle}</h2>
     </div>
   </header>
   <div class="description">
-    <p>A short description</p>
+    <p>{description}</p>
   </div>
 </div>
 
@@ -49,6 +51,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-left: 1rem;
   }
 
   h1 {

@@ -4,6 +4,10 @@
   let name = "Max";
   let age = 30;
   let url = '';
+  let title = '';
+  let description = '';
+
+  let defaults = undefined;
 
   // let uppercaseName; not required!
 
@@ -42,8 +46,21 @@
   <span>Profile image url:</span>
   <input type="text" bind:value={url} />
 </div>
+<div>
+  <span>Title:</span>
+  <input type="text" bind:value={title} />
+</div>
+<div>
+  <span>Description:</span>
+  <textarea rows="3" bind:value={description} />
+</div>
 
-<ContactCard userName={name} profileImageUrl={url}/>
+<ContactCard
+  userName={name || defaults}
+  profileImageUrl={url || defaults}
+  jobTitle={title || defaults}
+  description={description || defaults}
+/>
 
 <style>
   h1 {

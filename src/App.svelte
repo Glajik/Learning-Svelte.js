@@ -3,6 +3,7 @@
 
   let name = "Max";
   let age = 30;
+  let url = '';
 
   // let uppercaseName; not required!
 
@@ -33,9 +34,16 @@
 <button on:click={incrementAge}>Change Age</button>
 <!-- <button on:click="{changeName}">Change Name</button> -->
 <!-- <input type="text" value={name} on:input={nameInput} /> -->
-<input type="text" bind:value={name} />
+<div>
+  <span>Your name:</span>
+  <input type="text" bind:value={name} />
+</div>
+<div>
+  <span>Profile image url:</span>
+  <input type="text" bind:value={url} />
+</div>
 
-<ContactCard userName={name}/>
+<ContactCard userName={name} profileImageUrl={url}/>
 
 <style>
   h1 {

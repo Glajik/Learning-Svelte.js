@@ -1,11 +1,12 @@
 <script>
     export let userName = 'User Name';
+    export let profileImageUrl = '';
 </script>
 
 <div class="contact-card">
   <header>
     <div class="thumb">
-      <img src="" alt="" />
+      <img src={profileImageUrl} alt="" />
     </div>
     <div class="user-data">
       <h1>{userName}</h1>

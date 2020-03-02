@@ -59,7 +59,7 @@
   userName={name || defaults}
   profileImageUrl={url || defaults}
   jobTitle={title || defaults}
-  description={description || defaults}
+  {description}
 />
 
 <style>

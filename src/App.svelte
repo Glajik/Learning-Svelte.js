@@ -6,6 +6,12 @@
   let title = '';
   let description = '';
 
+  let done = false;
+
+  const addContact = () => {
+    done = true;
+  }
+
 </script>
 
 <div id="form">
@@ -27,7 +33,11 @@
   </div>
 </div>
 
+<button on:click={addContact}>Add contact card</button>
+
+{#if done}
 <ContactCard userName={name} jobTitle={title} {description} userImage={image} />
+{/if}
 
 <style>
   #form {

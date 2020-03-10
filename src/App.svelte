@@ -1,7 +1,7 @@
 <script>
   import ContactCard from "./ContactCard.svelte";
 
-  let name = "Max";
+  let name = '';
   let image = '';
   let title = '';
   let description = '';
@@ -11,13 +11,13 @@
   const isEmpty = value => value ? value.trim().length === 0 : true;
 
   const isValid = (...args) => !args.map(isEmpty).includes(true);
-  
-  $: formState = isValid(name, image, title, description) ? 'valid' : 'invalid';
 
   const addContact = () => {
-    if (formState === 'valid') {
+    if (isValid(name, image, title, description)) {
       formState = 'done';
+      return
     }
+    formState = 'invalid';
   }
 
 </script>
@@ -45,9 +45,10 @@
 
 {#if formState === 'done'}
   <ContactCard userName={name} jobTitle={title} {description} userImage={image} />
-{/if}
-{#if formState === 'invalid'}
+{:else if formState === 'invalid'}
   <p>Invalid input.</p>
+{:else}
+  <p>Please enter some data and hit the button!</p>
 {/if}
 
 <style>

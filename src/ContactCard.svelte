@@ -1,14 +1,22 @@
 <script>
-    export let userName = 'User Name';
-    export let profileImageUrl = 'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60';
-    export let jobTitle = 'Job Title';
-    export let description = 'A short description';
+  export let userName;
+  export let userImage;
+  export let jobTitle;
+  export let description;
+  
+  const maybeDefault = (value, alternative) => value && value.length > 0 ? value : alternative;
+
+  $: userName = maybeDefault(userName, 'UserName');
+  $: userImage = maybeDefault(userImage, 'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');
+  $: jobTitle = maybeDefault(jobTitle, 'Job Title');
+  $: description = maybeDefault(description, 'A short description');
+
 </script>
 
 <div class="contact-card">
   <header>
-    <div class="thumb">
-      <img src={profileImageUrl} alt="" />
+    <div class="thumb" class:thumb-placeholder="{!userImage}">
+      <img src={userImage} alt={userName} />
     </div>
     <div class="user-data">
       <h1>{userName}</h1>
@@ -26,6 +34,7 @@
     max-width: 30rem;
     border-radius: 5px;
     margin: 1rem 0;
+    background: white;
   }
 
   header {
@@ -38,6 +47,10 @@
   .thumb {
     width: 33%;
     height: 100%;
+  }
+
+  .thumb-placeholder {
+    background: #ccc;
   }
 
   img {

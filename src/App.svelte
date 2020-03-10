@@ -6,10 +6,18 @@
   let title = '';
   let description = '';
 
-  let done = false;
+  let formState = 'empty';
+
+  const isEmpty = value => value ? value.trim().length === 0 : true;
+
+  const isValid = (...args) => !args.map(isEmpty).includes(true);
+  
+  $: formState = isValid(name, image, title, description) ? 'valid' : 'invalid';
 
   const addContact = () => {
-    done = true;
+    if (formState === 'valid') {
+      formState = 'done';
+    }
   }
 
 </script>
@@ -35,8 +43,11 @@
 
 <button on:click={addContact}>Add contact card</button>
 
-{#if done}
-<ContactCard userName={name} jobTitle={title} {description} userImage={image} />
+{#if formState === 'done'}
+  <ContactCard userName={name} jobTitle={title} {description} userImage={image} />
+{/if}
+{#if formState === 'invalid'}
+  <p>Invalid input.</p>
 {/if}
 
 <style>

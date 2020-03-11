@@ -20,7 +20,7 @@
       // Add new contact to contacts
       contacts = [
         ...contacts,
-        { userName, jobTitle, userImage, description }
+        { id: Math.random(), userName, jobTitle, userImage, description }
       ];
 
       formState = 'empty';
@@ -32,6 +32,14 @@
     }
     formState = 'invalid';
   }
+
+const deleteFirst = () => {
+  contacts = contacts.slice(1);
+}
+
+const deleteLast = () => {
+  contacts = contacts.slice(0, -1);
+}
 
 </script>
 
@@ -56,13 +64,16 @@
 
 <button on:click={addContact}>Add contact card</button>
 
+<button on:click={deleteFirst}>Delete First</button>
+<button on:click={deleteLast}>Delete Last</button>
+
 {#if formState === 'invalid'}
   <p>Invalid input.</p>
 {:else}
   <p>Please enter some data and hit the button!</p>
 {/if}
 
-{#each contacts as contact, index}
+{#each contacts as contact, index (contact.id)}
   <h2># {index + 1}</h2>
   <ContactCard
     userName={contact.userName}

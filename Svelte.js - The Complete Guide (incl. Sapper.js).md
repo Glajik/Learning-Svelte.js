@@ -367,3 +367,29 @@ contacts = [...contacts, newContact]
 ```
 
 ## Section 5: Course Project - First Steps
+
+### 42. Different Ways of Mounting Components
+
+- Можно монтировать отдельные компоненты в соотв. контейнеры. Не обязательно все это монтировать через одну точку.
+
+```JS
+// Main.js
+import App from './App.svelte';
+import Header from './UI/Header.svelte';
+
+const app = new App({
+  target: document.querySelector('#app')
+});
+
+const app = new App({
+  target: document.querySelector('#header')
+});
+
+export default app;
+```
+
+- Важный момент при таком способе - компоненты не могут напрямую взаимодействовать - передавать друг другу данные.
+- Это великолепный подход для виджетов, но не подходит для SPA - Single Page Applications
+- Когда и где использовать такой подход:,
+  - Существующие (server-side rendered) страницы, которые Вы не хотите превращать в Svelte Single-Page-Apps - вместо этого Вы можете захотеть добавить некоторые динамические элементы (например, кнопку Dropdown с управлением Svelte).
+  - Веб-приложения (SPA или нет), которые обычно управляются через другой фреймворк или библиотеку (например, через React) - вы все равно можете взять на себя управление частью страницы через компоненты Svelte.

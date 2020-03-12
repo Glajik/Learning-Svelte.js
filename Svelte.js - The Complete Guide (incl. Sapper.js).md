@@ -365,3 +365,5 @@ contacts = [...contacts, newContact]
 ```HTML
 <button on:click={increment} on:click={track}>Нажми меня!</button>
 ```
+
+## Section 5: Course Project - First Steps

@@ -347,4 +347,21 @@ contacts = [...contacts, newContact]
 
 ## Section 4: A Closer Look at Reactivity
 
-## Section 5: Course Project - First Steps
+### 35. Updating Arrays & Objects Immutably
+
+- Reference Types vs Primitives
+- Чтобы Svelte отследил изменения, необходимо присвоить переменной новое значение. Если переменная хранит ссылку на объект, то нужно заменить на новую ссылку.
+
+### 36. Understanding Event Modifiers
+
+- `on:click|once` - срабатывает только один раз, удаляя затем обработчик.
+- `on:scroll|passive` - улучшает производительность прокрутки при тач-событиях или при прокрутке колёсиком мышки
+- `on:click|capture` - вызывает событие в режиме capture вместо bubbling.
+- `on:click|stopPropagation` - предотвращает "всплытие" события
+- `on:click|preventDefault` - вызывает event.preventDefault() перед запуском обработчика.
+
+Можно назначить несколько обработчиков для одного события:
+
+```HTML
+<button on:click={increment} on:click={track}>Нажми меня!</button>
+```

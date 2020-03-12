@@ -1,5 +1,1 @@
-/node_modules/
-/public/build/
-/src-max
-/public-max
-.DS_Store
+*.zip

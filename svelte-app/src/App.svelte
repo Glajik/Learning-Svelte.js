@@ -43,7 +43,7 @@ const deleteLast = () => {
 
 </script>
 
-<div id="form">
+<form id="form">
   <div class="form-control">
     <label for="userName">User Name</label>
     <input type="text" bind:value={userName} id="userName" />
@@ -60,18 +60,17 @@ const deleteLast = () => {
     <label for="desc">Description</label>
     <textarea rows="3" bind:value={description} id="description" />
   </div>
-</div>
-
-<button on:click={addContact}>Add contact card</button>
+  <button type="submit" on:click|preventDefault={addContact}>Add contact card</button>
+</form>
 
 <button on:click={deleteFirst}>Delete First</button>
 <button on:click={deleteLast}>Delete Last</button>
 
-{#if formState === 'invalid'}
-  <p>Invalid input.</p>
-{:else}
-  <p>Please enter some data and hit the button!</p>
-{/if}
+  {#if formState === 'invalid'}
+    <p>Invalid input.</p>
+  {:else}
+    <p>Please enter some data and hit the button!</p>
+  {/if}
 
 {#each contacts as contact, index (contact.id)}
   <h2># {index + 1}</h2>
@@ -88,5 +87,6 @@ const deleteLast = () => {
   #form {
     width: 30rem;
     max-width: 100%;
+    margin: 1rem 0;
   }
 </style>

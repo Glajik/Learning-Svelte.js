@@ -32,15 +32,6 @@
     }
     formState = 'invalid';
   }
-
-const deleteFirst = () => {
-  contacts = contacts.slice(1);
-}
-
-const deleteLast = () => {
-  contacts = contacts.slice(0, -1);
-}
-
 </script>
 
 <form id="form">
@@ -63,8 +54,8 @@ const deleteLast = () => {
   <button type="submit" on:click|preventDefault={addContact}>Add contact card</button>
 </form>
 
-<button on:click={deleteFirst}>Delete First</button>
-<button on:click={deleteLast}>Delete Last</button>
+<button on:click={() => contacts = contacts.slice(1)}>Delete First</button>
+<button on:click={() => contacts = contacts.slice(0, -1)}>Delete Last</button>
 
   {#if formState === 'invalid'}
     <p>Invalid input.</p>

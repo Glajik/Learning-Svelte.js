@@ -1,6 +1,7 @@
 <script>
   import Header from './UI/Header.svelte';
   import TextInput from './UI/TextInput.svelte';
+  import Button from './UI/Button.svelte';
   import MeetupGrid from './Meetups/MeetupGrid.svelte';
 
   let title = '';
@@ -84,7 +85,7 @@
       value={contactEmail}
       on:input={(e) => contactEmail = e.target.value}
     />
-    <button type="submit">Create</button>
+    <Button type="submit" caption="Save"/>
   </form>
 
   <MeetupGrid {meetups} />

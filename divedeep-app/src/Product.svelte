@@ -1,0 +1,16 @@
+<script>
+  import { createEventDispatcher } from 'svelte';
+  
+  export let productTitle;
+
+  const dispatch = createEventDispatcher();
+
+  const addToCart = () => dispatch('add-to-cart');
+  const deleteProduct = () => dispatch('delete', { id: 'p1' });
+</script>
+
+<article>
+  <h1>{productTitle}</h1>
+  <button on:click={addToCart}>Add to Cart</button>
+  <button on:click={deleteProduct}>Delete</button>
+</article>

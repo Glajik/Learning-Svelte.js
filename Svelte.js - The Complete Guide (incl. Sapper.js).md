@@ -413,6 +413,38 @@ export default app;
 
 - Когда создается собственный компонент, `bind:value` синтаксис не будет работать для свойств, которые экспортированы наружу.
 - Так же момент с событиями, если мы хотим обрабатывать события снаружи собственного компонента, можно их просто передать наверх таким образом: `<input ... on:input>` - это называется "event forwarding".
+- В отличие от событий DOM, события компонентов не всплывают через иерархию компонентов. Если нужно словить событие из какого-либо глубоко вложенного компонента, промежуточные компоненты должны пробросить событие.
 
 ## Section 6: Diving Deeper Into Components
 
+### 58. Emitting Custom Events
+
+```JS
+// Product.svelte
+<script>
+  import { createEventDispatcher } from 'svelte';
+  
+  export let productTitle;
+
+  const dispatch = createEventDispatcher();
+
+  const addToCart = () => dispatch('add-to-cart');
+  const deleteProduct = () => dispatch('delete', { id: 'p1' });
+</script>
+
+<article>
+  <h1>{productTitle}</h1>
+  <button on:click={addToCart}>Add to Cart</button>
+  <button on:click={deleteProduct}>Delete</button>
+</article>
+
+// App.svelte
+<Product
+  productTitle="A Book"
+  on:add-to-cart={() => alert('Added to cart!')}
+  on:delete={(event) => alert(`Product ${event.detail.id} deleted!`)}
+/>
+```
+- Сигнатуры:
+  - `dispatch(<message>, <payload>)`
+  - `event.detail <payload>`

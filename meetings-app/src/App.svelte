@@ -1,5 +1,6 @@
 <script>
   import Header from './UI/Header.svelte';
+  import TextInput from './UI/TextInput.svelte';
   import MeetupGrid from './Meetups/MeetupGrid.svelte';
 
   let title = '';
@@ -45,30 +46,44 @@
 
 <main>
   <form on:submit|preventDefault={addMeetup}>
-    <div class="form-control">
-      <label for="title">Title</label>
-      <input type="text" id="title" bind:value={title}>
-    </div>
-    <div class="form-control">
-      <label for="subtitle">Subtitle</label>
-      <input type="text" id="subtitle" bind:value={subtitle}>
-    </div>
-    <div class="form-control">
-      <label for="description">description</label>
-      <textarea id="description" rows="3"  bind:value={description}/>
-    </div>
-    <div class="form-control">
-      <label for="address">Address</label>
-      <input type="text" id="address" bind:value={address}>
-    </div>
-    <div class="form-control">
-      <label for="imageUrl">Image URL</label>
-      <input type="text" id="imageUrl" bind:value={imageUrl}>
-    </div>
-    <div class="form-control">
-      <label for="email">E-mail</label>
-      <input type="text" id="email" bind:value={contactEmail}>
-    </div>
+    <TextInput
+      label="Title"
+      id="title"
+      value={title}
+      on:input={(e) => title = e.target.value}
+    />
+    <TextInput
+      label="Subtitle"
+      id="subtitle"
+      value={subtitle}
+      on:input={(e) => subtitle = e.target.value}
+    />
+    <TextInput
+      label="Description"
+      id="description"
+      value={description}
+      rows="3"
+      on:input={(e) => description = e.target.value}
+    />
+    <TextInput
+      label="Address"
+      id="address"
+      value={address}
+      on:input={(e) => address = e.target.value}
+    />
+    <TextInput
+      label="Image URL"
+      id="imageUrl"
+      value={imageUrl}
+      on:input={(e) => imageUrl = e.target.value}
+    />
+    <TextInput
+      label="E-Mail"
+      type="email"
+      id="contactEmail"
+      value={contactEmail}
+      on:input={(e) => contactEmail = e.target.value}
+    />
     <button type="submit">Create</button>
   </form>
 
@@ -80,34 +95,9 @@
     margin-top: 4rem;
   }
 
-  input,
-textarea {
-  display: block;
-  width: 100%;
-  font: inherit;
-  border: none;
-  border-bottom: 2px solid #ccc;
-  border-radius: 3px 3px 0 0;
-  background: white;
-  padding: 0.15rem 0.25rem;
-  transition: border-color 0.1s ease-out;
-}
-
-input:focus,
-textarea:focus {
-  border-color: #e40763;
-  outline: none;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  width: 100%;
-}
-
-.form-control {
-  padding: 0.5rem 0;
-  width: 100%;
-  margin: 0.25rem 0;
-}
+  form {
+    width: 30rem;
+    max-width: 90%;
+    margin: auto;
+  }
 </style>

@@ -448,3 +448,10 @@ export default app;
 - Сигнатуры:
   - `dispatch(<message>, <payload>)`
   - `event.detail <payload>`
+  - тип генерируемого события - `Custom Event`
+
+### 60. Using Spread Props & Default Props
+
+- Использование Spread оператора для передачи свойств из объекта: `<Product {...product}/>`
+- Если присутствуют св-ва, которые компонент не ожидает - ничего страшного. Не нужно специально их извлекать.
+- Значения по умолчанию задаются так: `export let bestseller = false;`

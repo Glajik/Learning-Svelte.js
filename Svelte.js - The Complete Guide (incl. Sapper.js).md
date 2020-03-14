@@ -455,3 +455,47 @@ export default app;
 - Использование Spread оператора для передачи свойств из объекта: `<Product {...product}/>`
 - Если присутствуют св-ва, которые компонент не ожидает - ничего страшного. Не нужно специально их извлекать.
 - Значения по умолчанию задаются так: `export let bestseller = false;`
+
+### 61. Working with Slots
+
+Слоты позволяют указать где разместить вложенные компоненты
+
+```JS
+// Box.svelte
+<div class="box">
+  <slot /> // Вложенные компоненты отобразятся здесь
+</div>
+
+// App.svelte
+<Box>
+  <h2>Привет!</h2>
+  <p>Это компонент box. Тут можно разместить что угодно.</p>
+</Box>
+```
+
+- Слотов может быть несколько
+- Слоты можно именовать и затем с помощью с-ва slot во вложенном элементе указать в какой слот выводить.
+
+```JS
+// Modal.svelte
+<div class="modal">
+  <header>
+    <slot name="header" /> // Тут отобразится <h1>Hello!</h1>
+  </header>
+  <div class="content">
+    <slot /> // Тут отобразится <p>This works!</p>
+  </div>
+  <footer>
+    <slot name="footer">
+      <button>Close</button> // Эта кнопка будет замещена кнопкой Confirm
+    </slot>
+  </footer>
+</div>
+
+// App.svelte
+<Modal>
+  <h1 slot="header">Hello!</h1>
+  <p>This works!</p>
+  <button slot="footer">Confirm</button>
+</Modal>
+```

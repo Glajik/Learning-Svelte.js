@@ -1,5 +1,6 @@
 <script>
 	import Product from './Product.svelte';
+	import Modal from './Modal.svelte';
 	
 	let products = [
 		{
@@ -31,3 +32,9 @@ const deleteProduct = (e) => {
 		on:delete={deleteProduct}
 	/>
 {/each}
+
+<Modal>
+	<p>This works!</p>
+	<h1 slot="header">Hello!</h1>
+	<button slot="footer">Confirm</button>
+</Modal>

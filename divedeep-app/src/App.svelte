@@ -1,6 +1,9 @@
 <script>
+	import { tick } from 'svelte';
 	import Product from './Product.svelte';
 	import Modal from './Modal.svelte';
+
+	let text = 'This is some dummy text';
 	
 	let products = [
 		{
@@ -29,6 +32,31 @@
 
 	const showModal = () => modalVisible = true;
 	const hideModal = () => modalVisible = false;
+
+	const transform = (e) => {
+		if (e.which !== 9)  { // Ignore, if not TAB pressed
+			return;
+		}
+		e.preventDefault();
+
+		const { value, selectionStart, selectionEnd } = e.target;
+
+		console.log('selectionStart: %s, selectionEnd: %s', selectionStart, selectionEnd);
+
+		const before = value.slice(0, selectionStart);
+		const selected = value.slice(selectionStart, selectionEnd);
+		const after = value.slice(selectionEnd);
+		
+		const transformed = selected.toUpperCase();
+
+		text = before.concat(transformed).concat(after);
+
+		// Restore selection
+		tick().then(() => {
+			e.target.selectionStart = selectionStart;
+			e.target.selectionEnd = selectionEnd;
+		});
+	}
 </script>
 
 {#each products as product}
@@ -48,3 +76,5 @@
 		<button slot="footer" on:click={hideModal} disabled={!modalCloseable}>Confirm</button>
 	</Modal>
 {/if}
+
+<textarea rows="5" value={text} on:keydown={transform}/>

@@ -499,3 +499,38 @@ export default app;
   <button slot="footer">Confirm</button>
 </Modal>
 ```
+
+### 64. Using Slot Props
+
+Есть возможность передать значение из компонента в родительском компонент - обратно направленный поток данных. Сделать это можно используя свойства slot
+
+1. В компоненте в теге slot прописываем произвольный аттрибут и привязываем к нему значение - точно так же, когда передаем в какой либо компонент свойство.
+
+```JS
+<script>
+  let hovering = false;
+</script>
+<div on:mouseenter={() => hovering = true} on:mouseleave={() => hovering = false}>
+  <slot hovering={hovering}></slot>
+</div>
+```
+
+2. В родительском компоненте используем директиву `let:`
+
+```JS
+<script>
+  let hovering = false;
+</script>
+
+<Hoverable let:hovering={hovering}>
+  <div class:active={hovering}>
+    {#if hovering}
+      <p>На меня навели.</p>
+    {:else}
+      <p>Наведи на меня!</p>
+    {/if}
+  </div>
+</Hoverable>
+```
+
+- Нужно объявить переменную `hovering` в обоих компонентах, т.к. хотя они связаны директивой, однако они все же две отдельные сущности.

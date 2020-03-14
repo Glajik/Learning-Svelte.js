@@ -17,6 +17,7 @@
 	];
 
 	let modalVisible = false;
+	let modalCloseable = false; 
 
 	const addToCart = (e) => {
 		alert('Added to cart!')
@@ -41,9 +42,9 @@
 <button on:click={showModal}>Show modal</button>
 
 {#if modalVisible}
-	<Modal on:close={hideModal} on:cancel={hideModal}>
+	<Modal on:close={hideModal} on:cancel={hideModal} let:didAgree={modalCloseable}>
 		<p>This works!</p>
 		<h1 slot="header">Hello!</h1>
-		<!-- <button slot="footer" on:click={hideModal}>Confirm</button> -->
+		<button slot="footer" on:click={hideModal} disabled={!modalCloseable}>Confirm</button>
 	</Modal>
 {/if}

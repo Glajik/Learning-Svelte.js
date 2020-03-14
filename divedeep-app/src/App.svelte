@@ -16,13 +16,18 @@
 		}
 	];
 
-const addToCart = (e) => {
-	alert('Added to cart!')
-}
+	let modalVisible = false;
 
-const deleteProduct = (e) => {
-	alert(`Product ${e.detail.id} deleted!`);
-}
+	const addToCart = (e) => {
+		alert('Added to cart!')
+	}
+
+	const deleteProduct = (e) => {
+		alert(`Product ${e.detail.id} deleted!`);
+	}
+
+	const showModal = () => modalVisible = true;
+	const hideModal = () => modalVisible = false;
 </script>
 
 {#each products as product}
@@ -33,8 +38,12 @@ const deleteProduct = (e) => {
 	/>
 {/each}
 
-<Modal>
-	<p>This works!</p>
-	<h1 slot="header">Hello!</h1>
-	<button slot="footer">Confirm</button>
-</Modal>
+<button on:click={showModal}>Show modal</button>
+
+{#if modalVisible}
+	<Modal on:close={hideModal} on:cancel={hideModal}>
+		<p>This works!</p>
+		<h1 slot="header">Hello!</h1>
+		<!-- <button slot="footer" on:click={hideModal}>Confirm</button> -->
+	</Modal>
+{/if}

@@ -585,3 +585,5 @@ const keyPressed = (e) {
 ```
 
 ## Section 7: Course Project - Components Deep Dive
+
+- Используем значения по умолчанию null для большинства пропсов

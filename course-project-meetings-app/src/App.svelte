@@ -50,15 +50,21 @@
       return { ...meetup, isFavorite: !meetup.isFavorite }
     });
   }
+
+const cancelEdit = () => {
+  editMode = null;
+}
+
 </script>
 
 <Header />
 
 <main>
-  <div class="meetup-controls"></div>
-  <Button on:click={() => editMode = 'add'}>New Meetup</Button>
+  <div class="meetup-controls">
+    <Button on:click={() => editMode = 'add'}>New Meetup</Button>
+  </div>
   {#if editMode === 'add'}
-    <EditMeetup on:save={addMeetup}/>
+    <EditMeetup on:save={addMeetup} on:cancel={cancelEdit}/>
   {/if}
   <MeetupGrid {meetups} on:toggle-favorite={toggleFavorite}/>
 </main>

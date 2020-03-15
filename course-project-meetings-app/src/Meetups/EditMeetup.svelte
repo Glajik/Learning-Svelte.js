@@ -13,7 +13,7 @@
   const dispatch = createEventDispatcher();
 
   const submitForm = () => {
-    dispatch('add-meetup', {
+    dispatch('save', {
       title,
       subtitle,
       description,

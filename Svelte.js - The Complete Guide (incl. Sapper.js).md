@@ -563,3 +563,24 @@ Updates:
     e.target.selectionEnd = selectionEnd;
   });
 ```
+
+Прокрутка
+```JS
+const modal = document.querySelector('.modal');
+modal.scrollTo(0, modal.scrollHeight);
+```
+
+Какая клавиша нажата и позиция начала и окончания выделения текста.
+```JS
+const keyPressed = (e) {
+  if (e.which !== 9)  { // Ignore, if not TAB pressed
+	  return;
+  }
+  e.preventDefault();
+  
+  const start = e.targer.selectionStart;
+  const end = e.targer.selectionEnd;
+  // ...
+}
+```
+

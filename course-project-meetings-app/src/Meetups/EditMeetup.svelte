@@ -3,13 +3,17 @@
   import TextInput from '../UI/TextInput.svelte';
   import Button from '../UI/Button.svelte';
   import Modal from '../UI/Modal.svelte';
+  import { isEmpty } from '../helpers/validation.js';
 
   let title = '';
+  let titleValid = false;
   let subtitle = '';
   let description = '';
   let imageUrl = '';
   let address = '';
   let contactEmail = '';
+
+  $: titleValid = !isEmpty(title);
 
   const dispatch = createEventDispatcher();
 
@@ -32,7 +36,7 @@
     <TextInput
       label="Title"
       id="title"
-      valid={false}
+      valid={titleValid}
       validityMessage="Please enter something"
       value={title}
       on:input={(e) => title = e.target.value}

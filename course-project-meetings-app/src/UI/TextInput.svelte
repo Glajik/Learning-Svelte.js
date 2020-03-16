@@ -55,7 +55,7 @@
 
   .invalid {
     border-color: red;
-    background: rgb(255, 194, 194);
+    background: rgb(255, 245, 245);
   }
 
   .error-message {

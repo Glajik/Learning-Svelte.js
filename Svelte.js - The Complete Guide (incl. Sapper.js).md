@@ -633,6 +633,8 @@ const keyPressed = (e) {
 
 ### 87. Binding to Element References
 
+Доступная только для чтения привязка this применяется к любому HTML-элементу (или компоненту) и позволяет вам получить ссылку на отрендеренный элемент. 
+
 - Есть возможность привязать ссылку на объект DOM
   - `bind:this={usernameInput}`
   - Может быть полезной, чтобы чтобы получить значения, классы, аттрибуты напрямую используя DOM API
@@ -665,3 +667,7 @@ const keyPressed = (e) {
 <CustomInput bind:val={val} bind:this={customInput}/>
 <button on:click={clearCustomInput}>Clear Inputs</button>
 ```
+
+### 89. Validating Forms & Inputs
+
+Svelte не имеет встроенных средств для валидации, и предоставляет возможность реализовать свое решение, или использовать готовые библиотеки, например validate.js

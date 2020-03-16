@@ -1,6 +1,8 @@
 <script>
   import CustomInput from './CustomInput.svelte';
   import Toggle from './Toggle.svelte';
+  import { isValidEmail } from './validation';
+
   let val = 'Max';
   let selectedOption = 1;
   let summ = 0;
@@ -11,6 +13,8 @@
   let favCar;
   let usernameInput;
   let customInput;
+  let email = '';
+  let formIsValid = false;
 
   $: console.log(val);
   $: console.log(selectedOption);
@@ -28,6 +32,8 @@
   }
 
   const clearCustomInput = () => customInput.empty();
+
+  $: formIsValid = isValidEmail(email);
 </script>
 
 <input type="text" bind:value={val}>
@@ -86,3 +92,16 @@
 
 <input type="text" bind:this={usernameInput}>
 <button on:click={show}>Show References</button>
+
+<hr>
+
+<form on:submit|preventDefault>
+  <input type="email" bind:value={email} class={isValidEmail(email) ? '' : 'invalid'}/>
+  <button type="submit" disabled={!formIsValid}>Submit</button>
+</form>
+
+<style>
+  .invalid {
+    border: 1px solid red;
+  }
+</style>

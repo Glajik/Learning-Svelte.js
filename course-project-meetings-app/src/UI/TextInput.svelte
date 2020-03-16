@@ -3,6 +3,8 @@
   export let id;
   export let label;
   export let value;
+  export let valid = true;
+  export let validityMessage = '';
   export let rows = null;
   export let type = "text";
 </script>
@@ -10,9 +12,12 @@
 <div class="form-control">
   <label for="{id}">{label}</label>
   {#if controlType === 'textarea'}
-    <textarea {id} {rows} {value} on:input />
+    <textarea class:invalid={!valid} {id} {rows} {value} on:input />
   {:else}
-    <input type="{type}" {id} {value} on:input />
+    <input class:invalid={!valid} type="{type}" {id} {value} on:input />
+  {/if}
+  {#if validityMessage && !valid}
+    <p class="error-message">{validityMessage}</p>
   {/if}
 </div>
 
@@ -46,5 +51,15 @@
     display: block;
     margin-bottom: 0.5rem;
     width: 100%;
+  }
+
+  .invalid {
+    border-color: red;
+    background: rgb(255, 194, 194);
+  }
+
+  .error-message {
+    color: red;
+    margin: 0.25rem 0;
   }
 </style>

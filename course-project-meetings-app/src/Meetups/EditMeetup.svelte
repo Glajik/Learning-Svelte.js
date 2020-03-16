@@ -32,6 +32,8 @@
     <TextInput
       label="Title"
       id="title"
+      valid={false}
+      validityMessage="Please enter something"
       value={title}
       on:input={(e) => title = e.target.value}
     />

@@ -9,6 +9,8 @@
   let favColor = 'green';
   let favMeal = [];
   let favCar;
+  let usernameInput;
+  let customInput;
 
   $: console.log(val);
   $: console.log(selectedOption);
@@ -19,10 +21,18 @@
   $: console.log(favMeal);
   $: console.log(favCar);
   
+  const show = (event) => {
+    // console.log(document.querySelector('#username').value);
+    console.dir(usernameInput);
+    console.dir(customInput);
+  }
+
+  const clearCustomInput = () => customInput.empty();
 </script>
 
 <input type="text" bind:value={val}>
-<CustomInput bind:val={val} />
+<CustomInput bind:val={val} bind:this={customInput}/>
+<button on:click={clearCustomInput}>Clear Inputs</button>
 <Toggle bind:chosenOption={selectedOption}/>
 <input type="number" bind:value={number}>
 
@@ -71,3 +81,8 @@
     Porsche
   </option>
 </select>
+
+<hr>
+
+<input type="text" bind:this={usernameInput}>
+<button on:click={show}>Show References</button>

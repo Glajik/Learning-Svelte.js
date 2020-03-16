@@ -630,3 +630,38 @@ const keyPressed = (e) {
 
 - Списки можно создавать динамически с помощью {#each}
 - В качестве значений можно использовать не только строки, но и числа и даже объекты
+
+### 87. Binding to Element References
+
+- Есть возможность привязать ссылку на объект DOM
+  - `bind:this={usernameInput}`
+  - Может быть полезной, чтобы чтобы получить значения, классы, аттрибуты напрямую используя DOM API
+  - Не рекомендуется использовать, чтобы менять DOM элементы.
+- log.dir
+
+### 88. Binding to Component References
+
+- Ссылаться можно и на кастомные компоненты, которые, однако могут выглядеть и по другому.
+- Используя Refs можно вызвать экспортированную функцию из кастомного компонента
+
+```JS
+// CustomInput.svelte
+<script>
+  export let val;
+  export function empty() {
+    val = '';
+  };
+</script>
+
+<input type="text" bind:value={val} />
+
+// App.svelte
+<script>
+  let val = 'Max';
+  let customInput;
+  const clearCustomInput = () => customInput.empty();
+</script>
+
+<CustomInput bind:val={val} bind:this={customInput}/>
+<button on:click={clearCustomInput}>Clear Inputs</button>
+```

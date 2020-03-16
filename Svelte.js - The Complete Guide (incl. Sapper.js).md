@@ -671,3 +671,5 @@ const keyPressed = (e) {
 ### 89. Validating Forms & Inputs
 
 Svelte не имеет встроенных средств для валидации, и предоставляет возможность реализовать свое решение, или использовать готовые библиотеки, например validate.js
+
+## Section 9: Course Project - Bindings & Forms

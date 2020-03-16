@@ -602,3 +602,31 @@ const keyPressed = (e) {
 ### 84. Relying on Automatic Number Conversion
 
 - Для `<input type="number">` нужно помнить что содержимое `event.target.value` это текст. Однако при использовании директивы `bind:value` Svelte уже обрабатывает значения как числа.
+
+### 85. Binding Checkboxes & Radio Buttons
+
+- `<input type="checkbox" bind:checked={agreed}>`
+  - Используется свойство `checked`
+- `bind:group`
+  - для type="radio" - выбранное значение
+  - для type="checkbox" - массив значений
+    - только инициализировать необходимо переменную с массивом
+
+### 86. Binding <select> Dropdowns
+
+```HTML
+<select bind:value={favCar}>
+  <option value="aston-martin">
+    Aston Martin
+  </option>
+  <option value="ferrari">
+    Ferrari
+  </option>
+  <option value="porsche">
+    Porsche
+  </option>
+</select>
+```
+
+- Списки можно создавать динамически с помощью {#each}
+- В качестве значений можно использовать не только строки, но и числа и даже объекты

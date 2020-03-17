@@ -831,3 +831,28 @@ export const time = readable(currentDate, function start(set) {
 - Второй — это функция start, которая принимает callback-функцию set и возвращает функцию stop.
   - Функция start вызывается, когда у хранилища появляется первый подписчик;
   - stop вызывается, когда отписывается последний подписчик.
+
+### 110. Unlimited Power with Custom Stores
+
+Можно создать хранилище с собственной логикой по управлению состоянием для конкретных задач.
+
+```JS
+import { writable } from 'svelte/store';
+
+function createCount() {
+  const { subscribe, set, update } = writable(0);
+
+  return {
+    subscribe,
+    increment: () => update(n => n + 1),
+    decrement: () => update(n => n - 1),
+    reset: () => set(0)
+  };
+}
+
+export const count = createCount();
+```
+
+- function паттерн удобен, если в одном файле находится несколько хранилищ. В противном случае, можно обойтись и без него, просто экспортировать объект.
+- Главное условие, чтобы был правильный метод `subscribe`.
+- Важно также, чтобы хранилище обновлялось с помощью методов `update/set`

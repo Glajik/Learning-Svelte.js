@@ -18,12 +18,20 @@
   let contactEmail = '';
   let contactEmailValid = false;
 
+  let formIsValid = false;
+
   $: titleValid = !isEmpty(title);
   $: subtitleValid = !isEmpty(subtitle);
   $: descriptionValid = !isEmpty(description);
   $: imageUrlValid = isUrl(imageUrl);
   $: addressValid = !isEmpty(address);
   $: contactEmailValid = isEmail(contactEmail);
+  $: formIsValid = titleValid
+    && subtitleValid
+    && descriptionValid
+    && imageUrlValid
+    && addressValid
+    && contactEmailValid;
 
   const dispatch = createEventDispatcher();
 
@@ -96,7 +104,7 @@
   </form>
   <div slot="footer">
     <Button type="button" mode="outline" on:click={closeModal}>Cancel</Button>
-    <Button type="button" on:click={submitForm}>Save</Button>
+    <Button type="button" on:click={submitForm} disabled={!formIsValid}>Save</Button>
   </div>
 </Modal>
 

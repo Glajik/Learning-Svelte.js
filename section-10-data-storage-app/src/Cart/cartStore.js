@@ -17,7 +17,12 @@ export default {
   subscribe: cart.subscribe,
   addItem: (item) => {
     cart.update(
-      items => ([...items, item])
+      (items) => {
+        if (items.find(el => el.id === item.id)) {
+          return items;
+        }
+        return [...items, item];
+      }
     )
   },
   removeItem: (id) => {

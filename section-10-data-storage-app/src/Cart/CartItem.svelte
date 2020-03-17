@@ -1,4 +1,8 @@
+
 <script>
+  import { onDestroy } from 'svelte';
+  import cartItems from './cartStore.js';
+  import products from '../Products/productStore.js';
   import Button from "../UI/Button.svelte";
 
   export let title;
@@ -6,14 +10,29 @@
   export let id;
 
   let showDescription = false;
+  let description = 'Not available';
+  let fetchedProducts = [];
+
+  const unsubscribe = products.subscribe(
+    items => fetchedProducts = items
+  );
+
+  onDestroy(
+    () => typeof(unsubscribe) === 'function' && unsubscribe()
+  );
 
   function displayDescription() {
     showDescription = !showDescription;
+    const product = fetchedProducts.find(p => p.id === id);
+    if (product && product.description) {
+      description = product.description;
+    }
   }
 
   function removeFromCart() {
-    // ...
-    console.log("Removing...");
+    cartItems.update(
+      items => items.filter(item => item.id !== id)
+    );
   }
 </script>
 
@@ -46,6 +65,6 @@
   </Button>
   <Button on:click={removeFromCart}>Remove from Cart</Button>
   {#if showDescription}
-    <p>Not available :(</p>
+    <p>{description}</p>
   {/if}
 </li>

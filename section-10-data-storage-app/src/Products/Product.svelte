@@ -8,8 +8,6 @@
   export let description;
 
   function addToCart() {
-    // Now what?
-    console.log(id);
     cartStore.update(
       items => [...items, { id, title, price, description }]
     );

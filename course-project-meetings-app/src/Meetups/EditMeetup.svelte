@@ -6,17 +6,11 @@
   import { isEmpty, isUrl, isEmail } from '../helpers/validation.js';
 
   let title = '';
-  let titleValid = false;
   let subtitle = '';
-  let subtitleValid = false;
   let description = '';
-  let descriptionValid = false;
   let imageUrl = '';
-  let imageUrlValid = false;
   let address = '';
-  let addressValid = false;
   let contactEmail = '';
-  let contactEmailValid = false;
 
   let formIsValid = false;
 

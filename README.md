@@ -779,3 +779,24 @@ export default cart;
 </script>
 ```
 
+### 106. Using Autosubscriptions
+
+- Используя префикс `$` перед именем хранилища позволяет сразу получать значения из хранилища, а Svelte управлять подпиской автоматически.
+- Автоподписка работает только с переменными хранилищ, которые были объявлены (или импортированы) в верхнем уровне кода компонента.
+- Предполагается, что любое имя, начинающееся с $, ссылается на значение хранилища. Это зарезервированный символ — Svelte не позволит вам объявлять переменные с префиксом $.
+
+```JS
+<script>
+  import { onDestroy } from 'svelte';
+  import CartItem from "./CartItem.svelte";
+  import cartItems from "./cartStore.js"
+</script>
+
+<ul>
+  {#each $cartItems as item (item.id)}
+    <CartItem id={item.id} title={item.title} price={item.price} />
+  {:else}
+    <p>No items in cart yet!</p>
+  {/each}
+</ul>
+```

@@ -678,3 +678,78 @@ Svelte не имеет встроенных средств для валидац
 - Для динамически вычисляемых значений в `$:` не нужно объявлять переменные. Кстати они по другому называются "реактивные объявления".
 
 ## Section 10: Managing State & Data with Stores
+
+Проблема: С ростом сложности приложения, увеличивается количество statefull компонентов, которые должны быть связанны между собой. Ответственность за изменения этих данных распределена между ними, это удобно, но управлять изменениями становится сложно. Svelte.js имеет решение для таких случаев.
+
+### 102. Creating a Writable Store, Subscribing & Updating
+
+- Специальная функция `writable()` для создания хранилища
+- Обычно хранилища находятся в отдельном js файле
+- Функция `subscribe()` позволяет подписаться на изменения, используется для чтения/вывода данных
+- Функция `set()` или `update()` которая изменяет данные, может использоваться в обработчиках событий
+  - `set` полностью заменяет хранилище новыми данными
+  - `update` принимает функцию
+
+```JS
+// cartStore.js
+import { writable } from 'svelte/store';
+
+const cart = writable([
+  {
+    id: "p1",
+    title: "Test",
+    price: 9.99
+  },
+  {
+    id: "p2",
+    title: "Test",
+    price: 9.99
+  }
+]);
+
+export default cart;
+
+// Cart.svelte
+<script>
+  import CartItem from "./CartItem.svelte";
+  import cartStore from "./cartStore.js"
+
+  let items;
+
+  cartStore.subscribe(
+    data => items = data
+  );
+</script>
+
+<ul>
+  {#each items as item (item.id)}
+    <CartItem id={item.id} title={item.title} price={item.price} />
+  {:else}
+    <p>No items in cart yet!</p>
+  {/each}
+</ul>
+
+// Product.svelte
+<script>
+  import Button from "../UI/Button.svelte";
+  import cartStore from "../Cart/cartStore.js"
+
+  export let id;
+  export let title;
+  export let price;
+
+  function addToCart() {
+    cartStore.update(
+      items => [...items, { id, title, price }]
+    );
+  }
+</script>
+
+<div class="product">
+  <h1>{title}</h1>
+  <h2>{price}</h2>
+  <Button on:click={addToCart}>Add to Cart</Button>
+</div>
+```
+
+- Никогда не мутируйте объект хранилища

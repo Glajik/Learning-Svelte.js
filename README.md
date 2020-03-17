@@ -800,3 +800,34 @@ export default cart;
   {/each}
 </ul>
 ```
+
+### 109. Understanding Readable Stores
+
+Иногда нам не нужно, чтобы подписчики могли изменять данные.
+
+- Например:
+  - Положение указателя мыши
+  - Таймеры
+  - Геолокация, которая не будет обновляться снаружи
+
+```JS
+import { readable } from 'svelte/store';
+
+let currentDate = new Date();
+
+export const time = readable(currentDate, function start(set) {
+  const interval = setInterval(() => {
+    currentDate = new date();
+    set(currentDate);
+  }, 1000);
+
+  return function stop() {
+    clearInterval(interval);
+  };
+});
+```
+
+- Первый аргумент readable — начальное значение. Можно задать null или undefined, если на данный момент значение ещё неизвестно.
+- Второй — это функция start, которая принимает callback-функцию set и возвращает функцию stop.
+  - Функция start вызывается, когда у хранилища появляется первый подписчик;
+  - stop вызывается, когда отписывается последний подписчик.

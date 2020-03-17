@@ -1,4 +1,4 @@
-import { writeable, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 const products = writable([
   {

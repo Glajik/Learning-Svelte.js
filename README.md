@@ -613,7 +613,7 @@ const keyPressed = (e) {
   - для type="checkbox" - массив значений
     - только инициализировать необходимо переменную с массивом
 
-### 86. Binding <select> Dropdowns
+### 86. Binding `<select>` Dropdowns
 
 ```HTML
 <select bind:value={favCar}>

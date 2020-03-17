@@ -7,16 +7,18 @@
   export let validityMessage = '';
   export let rows = null;
   export let type = "text";
+
+  let touched = false;
 </script>
 
 <div class="form-control">
   <label for="{id}">{label}</label>
   {#if controlType === 'textarea'}
-    <textarea class:invalid={!valid} {id} {rows} {value} on:input />
+    <textarea class:invalid={!valid && touched} {id} {rows} {value} on:input on:blur={() => touched = true}/>
   {:else}
-    <input class:invalid={!valid} type="{type}" {id} {value} on:input />
+    <input class:invalid={!valid && touched} type="{type}" {id} {value} on:input on:blur={() => touched = true}/>
   {/if}
-  {#if validityMessage && !valid}
+  {#if validityMessage && !valid && touched}
     <p class="error-message">{validityMessage}</p>
   {/if}
 </div>

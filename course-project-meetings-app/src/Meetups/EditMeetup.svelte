@@ -3,17 +3,27 @@
   import TextInput from '../UI/TextInput.svelte';
   import Button from '../UI/Button.svelte';
   import Modal from '../UI/Modal.svelte';
-  import { isEmpty } from '../helpers/validation.js';
+  import { isEmpty, isUrl, isEmail } from '../helpers/validation.js';
 
   let title = '';
   let titleValid = false;
   let subtitle = '';
+  let subtitleValid = false;
   let description = '';
+  let descriptionValid = false;
   let imageUrl = '';
+  let imageUrlValid = false;
   let address = '';
+  let addressValid = false;
   let contactEmail = '';
+  let contactEmailValid = false;
 
   $: titleValid = !isEmpty(title);
+  $: subtitleValid = !isEmpty(subtitle);
+  $: descriptionValid = !isEmpty(description);
+  $: imageUrlValid = isUrl(imageUrl);
+  $: addressValid = !isEmpty(address);
+  $: contactEmailValid = isEmail(contactEmail);
 
   const dispatch = createEventDispatcher();
 
@@ -44,12 +54,16 @@
     <TextInput
       label="Subtitle"
       id="subtitle"
+      valid={subtitleValid}
+      validityMessage="Please enter valid subtitle"
       value={subtitle}
       on:input={(e) => subtitle = e.target.value}
     />
     <TextInput
       label="Description"
       id="description"
+      valid={descriptionValid}
+      validityMessage="Please enter valid description"
       value={description}
       rows="3"
       on:input={(e) => description = e.target.value}
@@ -57,12 +71,16 @@
     <TextInput
       label="Address"
       id="address"
+      valid={addressValid}
+      validityMessage="Please enter valid address"
       value={address}
       on:input={(e) => address = e.target.value}
     />
     <TextInput
       label="Image URL"
       id="imageUrl"
+      valid={imageUrlValid}
+      validityMessage="Please enter valid url"
       value={imageUrl}
       on:input={(e) => imageUrl = e.target.value}
     />
@@ -70,6 +88,8 @@
       label="E-Mail"
       type="email"
       id="contactEmail"
+      valid={contactEmailValid}
+      validityMessage="Please enter valid email"
       value={contactEmail}
       on:input={(e) => contactEmail = e.target.value}
     />

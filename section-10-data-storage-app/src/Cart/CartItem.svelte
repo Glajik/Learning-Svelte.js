@@ -11,22 +11,30 @@
 
   let showDescription = false;
   let description = 'Not available';
-  let fetchedProducts = [];
+  // let fetchedProducts = [];
 
-  const unsubscribe = products.subscribe(
-    items => fetchedProducts = items
-  );
+  // const unsubscribe = products.subscribe(
+  //   items => fetchedProducts = items
+  // );
 
-  onDestroy(
-    () => typeof(unsubscribe) === 'function' && unsubscribe()
-  );
+  // onDestroy(
+  //   () => typeof(unsubscribe) === 'function' && unsubscribe()
+  // );
 
   function displayDescription() {
     showDescription = !showDescription;
-    const product = fetchedProducts.find(p => p.id === id);
-    if (product && product.description) {
-      description = product.description;
-    }
+
+    const unsubscribe = products.subscribe(
+      items => {
+        const product = items.find(p => p.id === id);
+        
+        if (product && product.description) {
+          description = product.description;
+        }
+      }
+    );
+
+    unsubscribe();
   }
 
   function removeFromCart() {

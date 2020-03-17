@@ -753,3 +753,29 @@ export default cart;
 ```
 
 - Никогда не мутируйте объект хранилища
+
+### 105. Managing Store Subscriptions
+
+- Подписка сохраняется, когда компонент удаляется из DOM. Во избежании утечки памяти, в таких случаях надо отменить подписку.
+- Функция `subscribe()` возвращает функцию, с помощью которой можно отменить подписку на обновления в хранилище. Это удобно сделать в хуке `onDestroy`
+
+```JS
+// Cart.svelte
+<script>
+  import { onDestroy } from 'svelte';
+  import cartStore from "./cartStore.js"
+
+  let items;
+
+  const unsubscribe = cartStore.subscribe(
+    data => items = data
+  );
+
+  onDestroy(() => {
+    if (unsubscribe) {
+      unsubscribe();
+    }
+  });
+</script>
+```
+
